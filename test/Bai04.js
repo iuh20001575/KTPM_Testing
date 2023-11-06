@@ -14,10 +14,10 @@ const getData = async (filename) =>
 const splitRowData = (data) => data.split('\r')[0].split(',');
 
 (async () => {
-    const dataSuccess = await getData('Bai03_success.csv');
-    const dataFail = await getData('Bai03_fail.csv');
+    const dataSuccess = await getData('Bai04_success.csv');
+    const dataFail = await getData('Bai04_fail.csv');
 
-    describe('Split Fullname', function () {
+    describe('Sort Array', function () {
         this.timeout(3000);
 
         let driver;
@@ -27,38 +27,28 @@ const splitRowData = (data) => data.split('\r')[0].split(',');
         );
 
         for (let i = 0; i < dataSuccess.length; i++) {
-            const [fullName, firstName, middleName, lastName] = splitRowData(
-                dataSuccess[i],
-            );
+            const [arr, arrResult] = splitRowData(dataSuccess[i]);
 
-            it('Split success: ' + fullName, async function () {
+            it('Sort array success: ' + arr, async function () {
                 await driver.get(
-                    'https://thaoanhhaa1.github.io/KTPM_Tools/Bai03.html',
+                    'https://thaoanhhaa1.github.io/KTPM_Tools/Bai04.html',
                 );
 
-                await driver.findElement(By.id('full-name')).sendKeys(fullName);
+                await driver.findElement(By.id('full-name')).sendKeys(arr);
                 await driver.findElement(By.css('button')).click();
 
-                const firstNameActual = await driver
-                    .findElement(By.id('first-name'))
-                    .getAttribute('value');
-                const lastNameActual = await driver
-                    .findElement(By.id('last-name'))
-                    .getAttribute('value');
-                const middleNameActual = await driver
-                    .findElement(By.id('middle-name'))
+                const arrResultActual = await driver
+                    .findElement(By.id('result'))
                     .getAttribute('value');
 
-                Asserts.equal(firstNameActual, firstName);
-                Asserts.equal(middleNameActual, middleName);
-                Asserts.equal(lastNameActual, lastName);
+                Asserts.equal(arrResultActual, arrResult);
             });
         }
 
         afterEach(() => driver.quit());
     });
 
-    describe('Split fail', function () {
+    describe('Sort array fail', function () {
         this.timeout(3000);
 
         let driver;
@@ -68,14 +58,14 @@ const splitRowData = (data) => data.split('\r')[0].split(',');
         );
 
         for (let i = 0; i < dataFail.length; i++) {
-            const [fullName, errorMess] = splitRowData(dataFail[i]);
+            const [arr, errorMess] = splitRowData(dataFail[i]);
 
-            it('Split fail: ' + fullName, async function () {
+            it('Sort array fail: ' + arr, async function () {
                 await driver.get(
-                    'https://thaoanhhaa1.github.io/KTPM_Tools/Bai03.html',
+                    'https://thaoanhhaa1.github.io/KTPM_Tools/Bai04.html',
                 );
 
-                await driver.findElement(By.id('full-name')).sendKeys(fullName);
+                await driver.findElement(By.id('full-name')).sendKeys(arr);
                 await driver.findElement(By.css('button')).click();
 
                 const errorMessActual = await driver
