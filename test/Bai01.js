@@ -46,18 +46,6 @@ const splitRowData = (data) => data.split('\r')[0].split(',');
             });
         }
 
-        afterEach(() => driver.quit());
-    });
-
-    describe('Calculate electricity bill fail', function () {
-        this.timeout(3000);
-
-        let driver;
-
-        beforeEach(
-            () => (driver = new Builder().forBrowser(Browser.CHROME).build()),
-        );
-
         for (let i = 0; i < dataFail.length; i++) {
             const [oldNumber, newNumber, errorMess] = splitRowData(dataFail[i]);
 

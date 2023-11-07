@@ -45,18 +45,6 @@ const splitRowData = (data) => data.split('\r')[0].split(',');
             });
         }
 
-        afterEach(() => driver.quit());
-    });
-
-    describe('Sort array fail', function () {
-        this.timeout(3000);
-
-        let driver;
-
-        beforeEach(
-            () => (driver = new Builder().forBrowser(Browser.CHROME).build()),
-        );
-
         for (let i = 0; i < dataFail.length; i++) {
             const [arr, errorMess] = splitRowData(dataFail[i]);
 

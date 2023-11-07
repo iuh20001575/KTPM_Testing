@@ -55,18 +55,6 @@ const splitRowData = (data) => data.split('\r')[0].split(',');
             });
         }
 
-        afterEach(() => driver.quit());
-    });
-
-    describe('Split fail', function () {
-        this.timeout(3000);
-
-        let driver;
-
-        beforeEach(
-            () => (driver = new Builder().forBrowser(Browser.CHROME).build()),
-        );
-
         for (let i = 0; i < dataFail.length; i++) {
             const [fullName, errorMess] = splitRowData(dataFail[i]);
 
